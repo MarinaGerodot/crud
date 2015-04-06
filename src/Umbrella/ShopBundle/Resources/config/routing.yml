@@ -1,0 +1,35 @@
+umbrella_shop_index:
+    pattern:  /index
+    defaults: { _controller: UmbrellaShopBundle:Shop:index }
+    requirements:
+        _method:  GET    
+
+umbrella_shop_login:
+    pattern:  /login
+    defaults: { _controller: UmbrellaShopBundle:Shop:login }
+    requirements:
+        _method:  GET 
+        
+umbrella_shop_product:
+    pattern:  /product
+    defaults: { _controller: UmbrellaShopBundle:Shop:product }
+    requirements:
+        _method:  GET 
+
+umbrella_shop_single:
+    pattern:  /single
+    defaults: { _controller: UmbrellaShopBundle:Shop:single }
+    requirements:
+        _method:  GET 
+        
+umbrella_shop_register:
+    pattern:  /register
+    defaults: { _controller: UmbrellaShopBundle:Shop:register }
+    requirements:
+        _method:  GET 
+        
+umbrella_shop_contact:
+    pattern:  /contact
+    defaults: { _controller: UmbrellaShopBundle:Shop:contact }
+    requirements:
+        _method:  GET                   

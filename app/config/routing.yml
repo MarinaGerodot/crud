@@ -1,0 +1,7 @@
+umbrella_shop:
+    resource: "@UmbrellaShopBundle/Resources/config/routing.yml"
+    prefix:   /shop    
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
