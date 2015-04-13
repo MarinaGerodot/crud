@@ -1,0 +1,33 @@
+Umbrella\ShopBundle\Entity\Product:
+    type: entity
+    repositoryClass: Umbrella\ShopBundle\Repository\ProductRepository
+    table: product
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        title:
+            type: string
+            length: 255
+        description:
+            type: string
+            length: 500
+        photo:
+            type: string
+            length: 255      
+    manyToOne:
+        category:
+            targetEntity: Category
+            inversedBy: products
+            joinColumn:
+                name: category_id
+                referencedColumnName: id
+                
+    oneToMany:
+        userproduct:
+            targetEntity: Userproducts
+            mappedBy: product           
+                             
+                
+    
