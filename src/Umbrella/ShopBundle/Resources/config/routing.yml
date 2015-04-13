@@ -1,14 +1,36 @@
+umbrella_shop_welcom:
+    pattern:  /
+    defaults: { _controller: UmbrellaShopBundle:Shop:index }
+    
+_security_login:
+    pattern:  /login
+    defaults: { _controller: UmbrellaShopBundle:Secured:login }
+
+_security_check:
+    pattern:  /login_check
+
+_security_logout:
+    pattern:  /logout
+    
+#_shop_secured:
+    #resource: "@UmbrellaShopBundle/Controller/SecuredController.php"
+    #type:     annotation
+
+#_shop:
+    #resource: "@UmbrellaShopBundle/Controller/ShopController.php"
+    #type:     annotation
+    #prefix:   /shop    
+    
 umbrella_shop_index:
     pattern:  /index
     defaults: { _controller: UmbrellaShopBundle:Shop:index }
-    requirements:
-        _method:  GET    
+        
 
 umbrella_shop_login:
     pattern:  /login
-    defaults: { _controller: UmbrellaShopBundle:Shop:login }
+    defaults: { _controller: UmbrellaShopBundle:Secured:login }
     requirements:
-        _method:  GET 
+        #_method:  GET 
         
 umbrella_shop_product:
     pattern:  /product
@@ -26,10 +48,10 @@ umbrella_shop_register:
     pattern:  /register
     defaults: { _controller: UmbrellaShopBundle:Shop:register }
     requirements:
-        _method:  GET 
+        #_method:  GET 
         
 umbrella_shop_contact:
     pattern:  /contact
     defaults: { _controller: UmbrellaShopBundle:Shop:contact }
     requirements:
-        _method:  GET                   
+        #_method:  GET                   

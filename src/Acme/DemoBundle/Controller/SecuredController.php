@@ -30,14 +30,14 @@ class SecuredController extends Controller
             'error'         => $error,
         );
     }
-
+    
     /**
      * @Route("/login_check", name="_security_check")
      */
-    public function securityCheckAction()
+    /*public function securityCheckAction()
     {
         // The security layer will intercept this request
-    }
+    }*/
 
     /**
      * @Route("/logout", name="_demo_logout")

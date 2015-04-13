@@ -1,6 +1,6 @@
 umbrella_shop:
     resource: "@UmbrellaShopBundle/Resources/config/routing.yml"
-    prefix:   /shop    
+    prefix:   /    
 
 app:
     resource: "@AppBundle/Controller/"
