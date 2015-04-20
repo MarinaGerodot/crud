@@ -24,6 +24,8 @@ class SecuredController extends Controller
         } else {
             $error = $request->getSession()->get(SecurityContext::AUTHENTICATION_ERROR);
         }
+        
+        $request->getSession()->set('username', SecurityContext::LAST_USERNAME);
 
         return array(
             'last_username' => $request->getSession()->get(SecurityContext::LAST_USERNAME),

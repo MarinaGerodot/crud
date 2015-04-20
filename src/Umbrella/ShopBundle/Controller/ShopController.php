@@ -4,9 +4,13 @@ namespace Umbrella\ShopBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Umbrella\ShopBundle\Entity\Product;
+use Umbrella\ShopBundle\Entity\Category;
+
 
 class ShopController extends Controller
 {
@@ -16,127 +20,66 @@ class ShopController extends Controller
      */
     public function indexAction()
     {
-        $request = $this->getRequest();
+        $request = $this->get('request');
         
         $em = $this->getDoctrine()->getManager();
         $product_fields = $em->getRepository('UmbrellaShopBundle:Product')->findAll();
-        $user_products = $em->getRepository('UmbrellaShopBundle:Userproducts')->findAll();
+        $users = $em->getRepository('UmbrellaShopBundle:User')->findAll();
         
-        
-        //Вставить вызов из БД инфы о продуктах (всех) 'product_fields' => $product_fields,
-        //а уже во view ставить условие, что можно выводить а, что нет //'user_products' => $user_products,
+        $session = $this->get('session');
+        //$session->set('username', '_security.last_username');
         
         //Если пользователь не аутотифицирован как anonymous, выводим шаблон без имени пользователя 
         if (false === $this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
             
-            $not_auth = array(
-			
-				'username' => 'YOUR ACCOUNT',
-				'auth' => false,	
-			);
-                
-                //return $this->render('UmbrellaShopBundle:Shop:index.html.twig');
                 return $this->render('UmbrellaShopBundle:Shop:index.html.twig', array(
-                'param_name' => $not_auth,
+                'auth' => false,
+                'username' => 'YOUR ACCOUNT',
                 'product_fields' => $product_fields,
-                'user_products' => $user_products,
+                'users' => $users,
             ));
         }
         else {//для аутотифицированного пользователя, выводим шаблон с именем пользователя
               //(имя получаем как 'last_username' => $this->get('request')->getSession()->get(SecurityContext::LAST_USERNAME)
-              
-            $yes_auth = array(
-            
-                'username' => 'marina',
-				//'username' => $request->getSession()->get(SecurityContext::LAST_USERNAME),//почему-то не работает???
-				'auth' => true,	
-			);  
             
             return $this->render('UmbrellaShopBundle:Shop:index.html.twig', array(
-                'param_name' => $yes_auth,
+                'auth' => true,
+                'username' => $request->getSession()->get(SecurityContextInterface::LAST_USERNAME),//не работает!!!
+                //'username' => $session->get('username'),
                 'product_fields' => $product_fields,
-                'user_products' => $user_products,     
-            ));
-        }
-    }
-    
-    /** 
-     * @Route("/product")
-     * @Template()
-     */
-    public function productAction()
-    {
-        //return $this->render('UmbrellaShopBundle:Shop:product.html.twig');
-       $request = $this->getRequest();
-        
-        //Если пользователь не аутотифицирован как anonymous, выводим шаблон без имени пользователя 
-        if (false === $this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
-            
-            $not_auth = array(
-			
-				'username' => 'YOUR ACCOUNT',
-				'auth' => false,	
-			);
-                
-                //return $this->render('UmbrellaShopBundle:Shop:product.html.twig');
-                return $this->render('UmbrellaShopBundle:Shop:index.html.twig', array(
-                'param_name' => $not_auth,
-                
-            ));
-        }
-        else {//для аутотифицированного пользователя, выводим шаблон с именем пользователя
-              //(имя получаем как 'last_username' => $this->get('request')->getSession()->get(SecurityContext::LAST_USERNAME)
-              
-            $yes_auth = array(
-            
-                'username' => 'Marina',
-				//'username' => $request->getSession()->get(SecurityContext::LAST_USERNAME),//почему-то не работает???
-				'auth' => true,	
-			);  
-            
-            return $this->render('UmbrellaShopBundle:Shop:product.html.twig', array(
-                'param_name' => $yes_auth,
-               
+                'users' => $users,   
             ));
         }
     }
     
     /**
-     * @Route("/single")
+     * @Route("/single/{product_id}")
      * @Template()
      */
-    public function singleAction()
+    public function singleAction($product_id)
     {
-        //return $this->render('UmbrellaShopBundle:Shop:single.html.twig');
         $request = $this->getRequest();
+        
+        $em = $this->getDoctrine()->getManager();
+        $product = $em->getRepository('UmbrellaShopBundle:Product')->find($product_id);
         
         //Если пользователь не аутотифицирован как anonymous, выводим шаблон без имени пользователя 
         if (false === $this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
             
-            $not_auth = array(
-			
-				'username' => 'YOUR ACCOUNT',
-				'auth' => false,	
-			);
-                
-                //return $this->render('UmbrellaShopBundle:Shop:index.html.twig');
                 return $this->render('UmbrellaShopBundle:Shop:single.html.twig', array(
-                'param_name' => $not_auth,
+                'auth' => false,
+                'username' => 'YOUR ACCOUNT',
+                'product' => $product,
                 
             ));
         }
         else {//для аутотифицированного пользователя, выводим шаблон с именем пользователя
               //(имя получаем как 'last_username' => $this->get('request')->getSession()->get(SecurityContext::LAST_USERNAME)
               
-            $yes_auth = array(
-            
-                'username' => 'Marina',
-				//'username' => $request->getSession()->get(SecurityContext::LAST_USERNAME),//почему-то не работает???
-				'auth' => true,	
-			);  
-            
             return $this->render('UmbrellaShopBundle:Shop:single.html.twig', array(
-                'param_name' => $yes_auth,
+                'auth' => true,
+                'username' => $request->getSession()->get(SecurityContext::LAST_USERNAME),
+                'product' => $product,
                
             ));
         }
@@ -157,64 +100,23 @@ class ShopController extends Controller
      */
     public function contactAction()
     {
-        //return $this->render('UmbrellaShopBundle:Shop:contact.html.twig');
         $request = $this->getRequest();
         
         //Если пользователь не аутотифицирован как anonymous, выводим шаблон без имени пользователя 
         if (false === $this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
             
-            $not_auth = array(
-			
-				'username' => 'YOUR ACCOUNT',
-				'auth' => false,	
-			);
-                
-                //return $this->render('UmbrellaShopBundle:Shop:index.html.twig');
                 return $this->render('UmbrellaShopBundle:Shop:contact.html.twig', array(
-                'param_name' => $not_auth,
-                
+                'auth' => false,
+                'username' => 'YOUR ACCOUNT',
             ));
         }
         else {//для аутотифицированного пользователя, выводим шаблон с именем пользователя
-              //(имя получаем как 'last_username' => $this->get('request')->getSession()->get(SecurityContext::LAST_USERNAME)
-              
-            $yes_auth = array(
-            
-                'username' => 'Marina',
-				//'username' => $request->getSession()->get(SecurityContext::LAST_USERNAME),//почему-то не работает???
-				'auth' => true,	
-			);  
             
             return $this->render('UmbrellaShopBundle:Shop:contact.html.twig', array(
-                'param_name' => $yes_auth,
-               
+                'auth' => true,
+                'username' => $request->getSession()->get(SecurityContextInterface::LAST_USERNAME),
             ));
         }
     }
     
-    
-    //Это первый пробный опыт, с заходом в БД, но так делать не надо!!!
-    /*if (false === $this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
-                
-                return $this->render('UmbrellaShopBundle:Shop:product.html.twig');
-        }
-        else {//для аутотифицированного пользователя, выводим шаблон с именем пользователя
-              //(имя получаем из БД)
-            $em = $this->getDoctrine()->getManager();
-            $entities = $em->getRepository('UmbrellaShopBundle:User')->findAll();
-            
-            $query = $em->createQuery(
-                "SELECT j FROM UmbrellaShopBundle:User j WHERE j.username = 'marina'");
-                
-            $entities = $query->getResult();
-            
-            return $this->render('UmbrellaShopBundle:Shop:product.html.twig', array(
-                'entities' => $entities,
-            ));
-            
-        }  
-    
-    
-    */
-
 }

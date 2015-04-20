@@ -107,7 +107,7 @@ class Category
     }
 
     
-    // ...
+    //Чтобы при выводе списка категорий в форме добавления продукта система знала какое поле показывать в селекте  
     public function __toString()
     {
     	return $this->getName() ? $this->getName() : "";

@@ -1,0 +1,62 @@
+{% extends 'UmbrellaShopBundle::base_login.html.twig' %}
+
+{% block title %}
+NewProduct
+{% endblock %}
+
+
+{% block content %}
+
+<div class="account_grid"> 
+    <div class="login-right">
+  		<h3>Add Product</h3>
+        
+
+<form action="{{ path('umbrella_shop_createProduct') }}" method="post" {{ form_enctype(form) }}>
+
+{{ form_errors(form) }}
+
+<div>
+    {{ form_label(form.title) }}
+    {{ form_errors(form.title) }}
+    {{ form_widget(form.title) }}
+</div>
+<div>
+    {{ form_label(form.description) }}
+    {{ form_errors(form.description) }}
+    {{ form_widget(form.description) }}
+</div>
+<div>
+    {{ form_label(form.photo) }}
+    {{ form_errors(form.photo) }}
+    {{ form_widget(form.photo) }}
+</div>
+<div>
+    {{ form_label(form.userId) }}
+    {{ form_errors(form.userId) }}
+    {{ form_widget(form.userId) }}
+</div>
+<div>
+    {{ form_label(form.category) }}
+    {{ form_errors(form.category) }}
+    {{ form_widget(form.category) }}
+</div>
+
+{{ form_rest(form) }}
+
+<div align="right">
+<p><input type="submit" value="Add"/></p>
+</div>
+ 
+</form>
+
+<div align="right">
+<a class="now-get get-cart" href="javascript:history.back()">COME BACK</a>
+</div>            
+    </div>           
+</div>
+
+
+
+{% endblock %}
+{% set code = code(_self) %}

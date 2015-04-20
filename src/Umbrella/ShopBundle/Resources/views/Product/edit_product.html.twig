@@ -1,0 +1,61 @@
+{% extends 'UmbrellaShopBundle::base_login.html.twig' %}
+
+{% block title %}
+Update product
+{% endblock %}
+
+
+{% block content %}
+
+<div class="account_grid"> 
+    <div class="login-right">
+  		<h3>Update Product</h3>
+        
+
+<form action="{{ path('umbrella_shop_updateProduct', { 'product_id' : entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+
+{{ form_errors(edit_form) }}
+
+<div>
+    {{ form_label(edit_form.title) }}
+    {{ form_errors(edit_form.title) }}
+    {{ form_widget(edit_form.title) }}
+</div>
+<div>
+    {{ form_label(edit_form.description) }}
+    {{ form_errors(edit_form.description) }}
+    {{ form_widget(edit_form.description) }}
+</div>
+<div>
+    {{ form_label(edit_form.photo) }}
+    {{ form_errors(edit_form.photo) }}
+    {{ form_widget(edit_form.photo) }}
+</div>
+<div>
+    {{ form_label(edit_form.userId) }}
+    {{ form_errors(edit_form.userId) }}
+    {{ form_widget(edit_form.userId) }}
+</div>
+<div>
+    {{ form_label(edit_form.category) }}
+    {{ form_errors(edit_form.category) }}
+    {{ form_widget(edit_form.category) }}
+</div>
+
+{{ form_rest(edit_form) }}
+
+<div align="right">
+<p><input type="submit" value="Update"/></p>
+</div>
+ 
+</form>
+
+<div align="right">
+<a class="now-get get-cart" href="javascript:history.back()">COME BACK</a>
+</div>            
+    </div>           
+</div>
+
+
+{% endblock %}
+{% set code = code(_self) %}

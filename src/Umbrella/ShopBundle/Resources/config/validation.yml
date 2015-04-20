@@ -1,0 +1,12 @@
+Umbrella\ShopBundle\Entity\Product:
+    properties:
+        title:
+            - NotBlank: ~
+        description:
+            - NotBlank: ~
+        photo:
+            - NotBlank: ~
+        userId:
+            - NotBlank: ~        
+        category:
+            - NotBlank: ~   

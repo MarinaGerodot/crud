@@ -66,7 +66,7 @@
 			<div class="container">
 				<div class="header-bottom-left">
 					<div class="logo">
-						<a href="index"><img src="{{ asset('bootstrap/images/logo.png')}}" alt=" " /></a>
+						<a href="{{ path('umbrella_shop_index')}}"><img src="{{ asset('bootstrap/images/logo.png')}}" alt=" " /></a>
 					</div>
 					<div class="search">
 						<input type="text" value="" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = '';}" />
@@ -79,18 +79,18 @@
                 
                 
                 
-                    {% if param_name.auth %}
+                    {% if auth %}
                
 
-                            <div class="account"><a href="login"><span> </span>{{param_name.username}}</a></div>
+                            <div class="account"><a href="login"><span> </span>{{username}}</a></div>
                             <ul class="login">
 								<li ><a href="{{path('_security_login')}}"><span> </span>LOGOUT</a></li>
 							</ul>
                             
                     {% else %}        
-                            <div class="account"><a href="login"><span> </span>YOUR ACCOUNT</a></div>
+                            <div class="account"><a href="{{path('_security_login')}}"><span> </span>YOUR ACCOUNT</a></div>
                             <ul class="login">
-			                     <li><a href="login"><span> </span>LOGIN</a></li> |
+			                     <li><a href="{{path('_security_login')}}"><span> </span>LOGIN</a></li> |
 			                     <li ><a href="register">SIGNUP</a></li>
                             </ul>
                     {% endif %}
@@ -107,7 +107,7 @@
 	<!---->
 	<div class="container">
     
-       
+      
       {% block content %}
             
 	   {% endblock %}     
@@ -121,47 +121,47 @@
 		 <ul class="menu">
 		<li class="item1"><a href="#">Curabitur sapien<img class="arrow-img" src="{{asset('bootstrap/images/arrow1.png')}}" alt=""/> </a>
 			<ul class="cute">
-				<li class="subitem1"><a href="product">Cute Kittens </a></li>
-				<li class="subitem2"><a href="product">Strange Stuff </a></li>
-				<li class="subitem3"><a href="product">Automatic Fails </a></li>
+				<li class="subitem1"><a href="#">Cute Kittens </a></li>
+				<li class="subitem2"><a href="#">Strange Stuff </a></li>
+				<li class="subitem3"><a href="#">Automatic Fails </a></li>
 			</ul>
 		</li>
 		<li class="item2"><a href="#">Dignissim purus <img class="arrow-img " src="{{asset('bootstrap/images/arrow1.png')}}" alt=""/></a>
 			<ul class="cute">
-				<li class="subitem1"><a href="product">Cute Kittens </a></li>
-				<li class="subitem2"><a href="product">Strange Stuff </a></li>
-				<li class="subitem3"><a href="product">Automatic Fails </a></li>
+				<li class="subitem1"><a href="#">Cute Kittens </a></li>
+				<li class="subitem2"><a href="#">Strange Stuff </a></li>
+				<li class="subitem3"><a href="#">Automatic Fails </a></li>
 			</ul>
 		</li>
 		<li class="item3"><a href="#">Ultrices id du<img class="arrow-img img-arrow" src="{{asset('bootstrap/images/arrow1.png')}}" alt=""/> </a>
 			<ul class="cute">
-				<li class="subitem1"><a href="product">Cute Kittens </a></li>
-				<li class="subitem2"><a href="product">Strange Stuff </a></li>
-				<li class="subitem3"><a href="product">Automatic Fails</a></li>
+				<li class="subitem1"><a href="#">Cute Kittens </a></li>
+				<li class="subitem2"><a href="#">Strange Stuff </a></li>
+				<li class="subitem3"><a href="#">Automatic Fails</a></li>
 			</ul>
 		</li>
 		<li class="item4"><a href="#">Cras iacaus rhone <img class="arrow-img img-left-arrow" src="{{asset('bootstrap/images/arrow1.png')}}" alt=""/></a>
 			<ul class="cute">
-				<li class="subitem1"><a href="product">Cute Kittens </a></li>
-				<li class="subitem2"><a href="product">Strange Stuff </a></li>
-				<li class="subitem3"><a href="product">Automatic Fails </a></li>
+				<li class="subitem1"><a href="#">Cute Kittens </a></li>
+				<li class="subitem2"><a href="#">Strange Stuff </a></li>
+				<li class="subitem3"><a href="#">Automatic Fails </a></li>
 			</ul>
 		</li>
 				<li>
 			<ul class="kid-menu">
-				<li><a href="product">Tempus pretium</a></li>
-				<li ><a href="product">Dignissim neque</a></li>
-				<li ><a href="product">Ornared id aliquet</a></li>
+				<li><a href="#">Tempus pretium</a></li>
+				<li ><a href="#">Dignissim neque</a></li>
+				<li ><a href="#">Ornared id aliquet</a></li>
 			</ul>
 		</li>
 		<ul class="kid-menu ">
-				<li><a href="product">Commodo sit</a></li>
-				<li ><a href="product">Urna ac tortor sc</a></li>
-				<li><a href="product">Ornared id aliquet</a></li>
-				<li><a href="product">Urna ac tortor sc</a></li>
-				<li ><a href="product">Eget nisi laoreet</a></li>
-				<li><a href="product">Faciisis ornare</a></li>
-				<li class="menu-kid-left"><a href="contact">Contact us</a></li>
+				<li><a href="#">Commodo sit</a></li>
+				<li ><a href="#">Urna ac tortor sc</a></li>
+				<li><a href="#">Ornared id aliquet</a></li>
+				<li><a href="#">Urna ac tortor sc</a></li>
+				<li ><a href="#">Eget nisi laoreet</a></li>
+				<li><a href="#">Faciisis ornare</a></li>
+				<li class="menu-kid-left"><a href="{{path('umbrella_shop_contact')}}">Contact us</a></li>
 			</ul>
 	</ul>
 					</div>
@@ -186,14 +186,14 @@
 			});
 		</script>
 					<div class=" chain-grid menu-chain">
-	   		     		<a href="single"><img class="img-responsive chain" src="{{asset('bootstrap/images/wat.jpg')}}" alt=" " /></a>	   		     		
+	   		     		<a href="#"><img class="img-responsive chain" src="{{asset('bootstrap/images/wat.jpg')}}" alt=" " /></a>	   		     		
 	   		     		<div class="grid-chain-bottom chain-watch">
 		   		     		<span class="actual dolor-left-grid">300$</span>
 		   		     		<span class="reducedfrom">500$</span>  
-		   		     		<h6><a href="single">Lorem ipsum dolor</a></h6>  		     			   		     										
+		   		     		<h6><a href="#">Lorem ipsum dolor</a></h6>  		     			   		     										
 	   		     		</div>
 	   		     	</div>
-	   		     	 <a class="view-all all-product" href="product">VIEW ALL PRODUCTS<span> </span></a> 	
+	   		     	 <a class="view-all all-product" href="#">VIEW ALL PRODUCTS<span> </span></a> 	
 			</div>
 	   		    <div class="clearfix"> </div>
                    

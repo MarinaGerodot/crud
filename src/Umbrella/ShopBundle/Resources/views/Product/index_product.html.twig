@@ -1,0 +1,66 @@
+{% extends 'UmbrellaShopBundle::base_login.html.twig' %}
+
+{% block title %}
+Index_product
+{% endblock %}
+
+
+{% block content %}
+
+
+
+<div class="women-product">
+		<div class=" w_content">
+			<div class="women">
+				<a href="#"><h4>Enthecwear - <span>4449 itemms</span> </h4></a>
+				<ul class="w_nav">
+					<li>Sort : </li>
+			     	<li><a class="active" href="#">popular</a></li> |
+			     	<li><a href="#">new </a></li> |
+			     	<li><a href="#">discount</a></li> |
+			     	<li><a href="#">price: Low High </a></li> 
+			     <div class="clearfix"> </div>	
+			     </ul>
+			     <div class="clearfix"> </div>	
+			</div>
+		</div>
+        
+<div class="grid-product">
+{% set count = 0 %}       
+{% for entity in entities %}
+
+    {% for user in users %}
+            
+            {% if entity.userId == user.id %}
+		
+		  <div class="  product-grid">
+			<div class="content_box"><a href="#">
+			   	<div class="left-grid-view grid-view-left">
+			   	   	 <img src="{{asset(entity.photo)}}" class="img-responsive watch-right" alt=""/>
+				   	   	<div class="mask">
+	                        <div class="info">Quick View</div>
+			            </div>
+				   	  </a>
+				</div>
+				    <h4><a href="#"> Duis autem</a></h4>
+				     <p>It is a long established fact that a reader</p>
+				     Rs. 499
+			   	</div>
+              </div>
+              <!-- Выводим построчно, по три товара в строке  -->    
+              {% set count = count + 1 %}
+              {% if count == 3 %}
+		          <div class="clearfix"> </div>
+                  {% set count = 0 %}
+               {% endif %}
+               
+           {% endif %}       
+
+     {% endfor %}
+     
+ {% endfor %}
+    </div>
+</div>
+    
+{% endblock %}
+{% set code = code(_self) %}

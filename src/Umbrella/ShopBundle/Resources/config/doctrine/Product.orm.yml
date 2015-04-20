@@ -15,7 +15,9 @@ Umbrella\ShopBundle\Entity\Product:
             length: 500
         photo:
             type: string
-            length: 255      
+            length: 255
+        userId:
+            type: integer          
     manyToOne:
         category:
             targetEntity: Category
@@ -24,10 +26,7 @@ Umbrella\ShopBundle\Entity\Product:
                 name: category_id
                 referencedColumnName: id
                 
-    oneToMany:
-        userproduct:
-            targetEntity: Userproducts
-            mappedBy: product           
+    
                              
                 
     

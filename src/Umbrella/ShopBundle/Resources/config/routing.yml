@@ -1,7 +1,7 @@
 umbrella_shop_welcom:
     pattern:  /
     defaults: { _controller: UmbrellaShopBundle:Shop:index }
-    
+
 _security_login:
     pattern:  /login
     defaults: { _controller: UmbrellaShopBundle:Secured:login }
@@ -12,46 +12,68 @@ _security_check:
 _security_logout:
     pattern:  /logout
     
-#_shop_secured:
-    #resource: "@UmbrellaShopBundle/Controller/SecuredController.php"
-    #type:     annotation
-
-#_shop:
-    #resource: "@UmbrellaShopBundle/Controller/ShopController.php"
-    #type:     annotation
-    #prefix:   /shop    
-    
 umbrella_shop_index:
     pattern:  /index
     defaults: { _controller: UmbrellaShopBundle:Shop:index }
         
-
 umbrella_shop_login:
     pattern:  /login
     defaults: { _controller: UmbrellaShopBundle:Secured:login }
-    requirements:
-        #_method:  GET 
         
 umbrella_shop_product:
     pattern:  /product
-    defaults: { _controller: UmbrellaShopBundle:Shop:product }
+    defaults: { _controller: UmbrellaShopBundle:Product:index }
     requirements:
         _method:  GET 
 
 umbrella_shop_single:
-    pattern:  /single
+    pattern:  /single/{product_id}
     defaults: { _controller: UmbrellaShopBundle:Shop:single }
     requirements:
-        _method:  GET 
+        _method:  GET
+        product_id: \d+
         
+umbrella_shop_new:
+    pattern:  /new
+    defaults: { _controller: UmbrellaShopBundle:Product:new }
+        
+umbrella_shop_editProduct:
+    pattern:  /editProduct/{product_id}
+    defaults: { _controller: UmbrellaShopBundle:Product:edit }
+    requirements:
+        _method:  GET
+        product_id: \d+
+                
+umbrella_shop_deleteProduct:
+    pattern:  /deleteProduct/{product_id}
+    defaults: { _controller: UmbrellaShopBundle:Product:delete }
+    requirements:
+        _method:  GET
+        product_id: \d+      
+
+umbrella_shop_createProduct:
+    pattern:  /createProduct
+    defaults: { _controller: UmbrellaShopBundle:Product:create }
+    requirements:
+        _method:  POST
+        
+umbrella_shop_updateProduct:
+    pattern:  /updateProduct/{product_id}
+    defaults: { _controller: UmbrellaShopBundle:Product:update }
+    requirements:
+        _method:  POST
+        product_id: \d+    
+       
 umbrella_shop_register:
     pattern:  /register
     defaults: { _controller: UmbrellaShopBundle:Shop:register }
     requirements:
-        #_method:  GET 
+        _method:  GET 
         
 umbrella_shop_contact:
     pattern:  /contact
     defaults: { _controller: UmbrellaShopBundle:Shop:contact }
     requirements:
-        #_method:  GET                   
+        _method:  GET
+
+                       

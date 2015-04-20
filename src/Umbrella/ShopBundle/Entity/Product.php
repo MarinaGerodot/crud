@@ -33,6 +33,11 @@ class Product
      * @ORM\Column(type="string", length=255)
      */
     private $photo;
+    
+    /**
+     * @ORM\Column(type="integer")
+     */ 
+    private $userId;
 
 
     /**
@@ -41,49 +46,16 @@ class Product
     private $category;
     
     /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $userproduct;
-    
-   /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->userproduct = new \Doctrine\Common\Collections\ArrayCollection();
-    } 
-    
-    /**
-     * Add userproducts
+     * Set id
      *
-     * @param \Umbrella\ShopBundle\Entity\Userproducts $userproducts
+     * @param integer $id
      * @return Product
      */
-    public function addUserproduct(\Umbrella\ShopBundle\Entity\Userproducts $userproduct)
+    public function setId($id)
     {
-        $this->userproduct[] = $userproduct;
+        $this->id = $id;
 
         return $this;
-    }
-
-    /**
-     * Remove userproducts
-     *
-     * @param \Umbrella\ShopBundle\Entity\Userproducts $userproducts
-     */
-    public function removeUserproduct(\Umbrella\ShopBundle\Entity\Userproducts $userproduct)
-    {
-        $this->userproduct->removeElement($userproduct);
-    }
-
-    /**
-     * Get userproducts
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getUserproduct()
-    {
-        return $this->userproduct;
     }
     
     /**
@@ -95,7 +67,42 @@ class Product
     {
         return $this->id;
     }
+    
+    
+    /**
+     * Set userId
+     *
+     * @param integer $userId
+     * @return Product
+     */
+    public function setUserId($userId)
+    {
+        $this->userId = $userId;
 
+        return $this;
+    }
+    
+    /**
+     * Get userId
+     *
+     * @return integer 
+     */
+    public function getUserId()
+    {
+        return $this->userId;
+    }
+    
+    /**
+     * Get category_id
+     * 
+     * @return integer 
+     */
+    public function getCategory_id()//Через этот метод, мы в шаблоне получаем получаем поле category_id
+    {
+        return $this->category->getId();
+        //return $this->getCategory()->getId();
+    }
+    
     /**
      * Set type
      *
@@ -177,6 +184,13 @@ class Product
         $this->category = $category;
 
         return $this;
+        //if(!is_array($category))
+        //{
+            //$category = array($category);
+        //}
+        //$this->category = $category;
+
+        //return $this;
     }
 
     /**
@@ -188,5 +202,7 @@ class Product
     {
         return $this->category;
     }
+    
+
    
 }
