@@ -6,7 +6,7 @@
         
         {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.css') }}" type="text/css" media="all"/>
-        
+        <link rel="stylesheet" href="{{ asset('bootstrap/css/popup.css') }}" type="text/css" media="all"/>
         <!--theme-style-->
         <link rel="stylesheet" href="{{ asset('bundles/umbrellashop/css/style.css') }}" type="text/css" media="all"/>	
         <!--//theme-style-->
@@ -19,6 +19,7 @@
         {% block javascripts %}
             <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
             <script src="{{ asset('bootstrap/js/jquery.min.js')}}"></script>
+            <script src="{{ asset('bootstrap/js/angular.js')}}"></script>
         {% endblock %}
         
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />

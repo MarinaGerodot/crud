@@ -16,10 +16,6 @@ umbrella_shop_index:
     pattern:  /index
     defaults: { _controller: UmbrellaShopBundle:Shop:index }
         
-umbrella_shop_login:
-    pattern:  /login
-    defaults: { _controller: UmbrellaShopBundle:Secured:login }
-        
 umbrella_shop_product:
     pattern:  /product
     defaults: { _controller: UmbrellaShopBundle:Product:index }

@@ -55,8 +55,6 @@ class ProductController extends Controller
      * Creates a new Product entity.
      *
      * @Route("/createProduct", name="product_create")
-     * @Method("post")
-     * @Template("UmbrellaShopBundle:Product:new_product.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -78,11 +76,6 @@ class ProductController extends Controller
         }else {
             throw $this->createNotFoundException('Unable to find POST request.');
         }
-
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView()
-        );
     }
 
     /**
@@ -114,7 +107,6 @@ class ProductController extends Controller
      * Edits an existing Product entity.
      *
      * @Route("/updateProduct/{product_id}", name="product_update")
-     * @Template("UmbrellaShopBundle:Product:update_product.html.twig")
      */
     public function updateAction($product_id)
     {
@@ -147,7 +139,6 @@ class ProductController extends Controller
      * Deletes a Product entity.
      *
      * @Route("/deleteProduct/{product_id}", name="product_delete")
-     * @Template("UmbrellaShopBundle:Product:delete_product.html.twig")
      */
     public function deleteAction($product_id)
     {

@@ -6,7 +6,7 @@
         
         {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.css') }}" type="text/css" media="all"/>
-        
+        <link rel="stylesheet" href="{{ asset('bootstrap/css/popup.css') }}" type="text/css" media="all"/>
         <!--theme-style-->
         <link rel="stylesheet" href="{{ asset('bundles/umbrellashop/css/style.css') }}" type="text/css" media="all"/>	
         <!--//theme-style-->
@@ -19,6 +19,7 @@
         {% block javascripts %}
             <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
             <script src="{{ asset('bootstrap/js/jquery.min.js')}}"></script>
+            <script src="{{ asset('bootstrap/js/angular.js')}}"></script>
         {% endblock %}
         
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
@@ -80,12 +81,41 @@
                 
                 
                     {% if auth %}
-               
+                            <body ng-app='ModalDemo'>
+                                <div ng-controller='MyCtrl'>
+                                    <div class="account"><a href="#" ng-click='toggleModal()'><span> </span>{{username}}</a></div>
+                                    
+                                    
+                                         <ul class="login">
+								            <li ><a href="{{path('_security_login')}}"><span> </span>LOGOUT</a></li>
+							             </ul>
+                                      <modal-dialog show='modalShown' width='600px' height='80%'>
+                                      <div class=" login-right">
+	  	                                <h3>REGISTERED CUSTOMERS</h3>
+                                            <p>If you have an account with us, please log in.</p>
+                                            <form action="{{path('_security_check')}}" method="post" id="login">
+                                            <div>
+				                                <span>User name<label>*</label></span>
+				                                <input type="text" id="username" name="_username" value="{{username}}"/> 
+                                            </div>
+                                            <div>
+				                                <span>Password<label>*</label></span>
+				                                <input type="password" id="password" name="_password"/> 
+                                            </div>
+                                                <a class="forgot" href="#">Forgot Your Password?</a>
+                                                <input type="submit" value="login"/>
+                                            </form>
+                                       </div>
+                                        <div class="clearfix"> </div>	
+    
+  	                                     <h3>NEW CUSTOMERS</h3>
+                                            <p>By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.</p>
+			                                 <a class="acount-btn" href="{{path('umbrella_shop_register')}}">Create an Account</a>
+   
+                                                <div class="clearfix"> </div>
 
-                            <div class="account"><a href="login"><span> </span>{{username}}</a></div>
-                            <ul class="login">
-								<li ><a href="{{path('_security_login')}}"><span> </span>LOGOUT</a></li>
-							</ul>
+                                        </modal-dialog>
+                                 
                             
                     {% else %}        
                             <div class="account"><a href="{{path('_security_login')}}"><span> </span>YOUR ACCOUNT</a></div>
@@ -104,6 +134,7 @@
 			</div>
 		</div>
 	</div>
+    </div>
 	<!---->
 	<div class="container">
     
@@ -184,6 +215,36 @@
 			    });
 			
 			});
+            
+            app = angular.module('ModalDemo', []);
+            app.directive('modalDialog', function() {
+            return {
+                restrict: 'E',
+                scope: {
+                show: '='
+            },
+            replace: true, // Replace with the template below
+            transclude: true, // we want to insert custom content inside the directive
+            link: function(scope, element, attrs) {
+            scope.dialogStyle = {};
+            if (attrs.width)
+                scope.dialogStyle.width = attrs.width;
+            if (attrs.height)
+                scope.dialogStyle.height = attrs.height;
+            scope.hideModal = function() {
+            scope.show = false;
+            };
+            },
+            template: "<div class='ng-modal' ng-show='show'><div class='ng-modal-overlay' ng-click='hideModal()'></div><div class='ng-modal-dialog' ng-style='dialogStyle'><div class='ng-modal-close' ng-click='hideModal()'>X</div><div class='ng-modal-dialog-content' ng-transclude></div></div></div>"
+            };
+            });
+
+            app.controller('MyCtrl', ['$scope', function($scope) {
+            $scope.modalShown = false;
+            $scope.toggleModal = function() {
+            $scope.modalShown = !$scope.modalShown;
+            };
+            }]);
 		</script>
 					<div class=" chain-grid menu-chain">
 	   		     		<a href="#"><img class="img-responsive chain" src="{{asset('bootstrap/images/wat.jpg')}}" alt=" " /></a>	   		     		
@@ -290,6 +351,7 @@
 					</ul>
 				</div>
 				<div class="clearfix"> </div>
+               
 			</div>
 		</div>
 	</div>
